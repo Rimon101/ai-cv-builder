@@ -362,8 +362,14 @@ export default function BuilderPage() {
                 loadingSkills={loadingSkills}
               />
             ) : (
-              <div data-export-root className="overflow-auto rounded-xl border bg-white p-2">
-                <CVPreview data={cvData} />
+              <div data-export-root className="overflow-auto rounded-xl border bg-white p-1 sm:p-2">
+                <div className="flex justify-center">
+                  <div className="cv-preview-shell [--preview-scale:0.4] sm:[--preview-scale:0.55]">
+                    <div className="cv-preview-scale">
+                      <CVPreview data={cvData} />
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </div>
@@ -384,8 +390,14 @@ export default function BuilderPage() {
                 loadingSkills={loadingSkills}
               />
             </div>
-            <div data-export-root className="max-h-[88vh] overflow-auto rounded-xl border bg-white p-2 lg:sticky lg:top-4">
-              <CVPreview data={cvData} />
+            <div data-export-root className="max-h-[88vh] overflow-auto rounded-xl border bg-white p-2 sm:p-3 lg:sticky lg:top-4">
+              <div className="flex justify-center">
+                <div className="cv-preview-shell [--preview-scale:0.7] lg:[--preview-scale:0.85] xl:[--preview-scale:1]">
+                  <div className="cv-preview-scale">
+                    <CVPreview data={cvData} />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}

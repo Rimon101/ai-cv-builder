@@ -29,57 +29,74 @@ export async function exportCVToPDF(fullName?: string): Promise<void> {
     throw new Error("Preview content not found.");
   }
 
-  const canvas = await html2canvas(target, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: "#ffffff",
-  });
-
-  const imgWidth = PAGE_WIDTH;
-  const imgHeight = (canvas.height * PAGE_WIDTH) / canvas.width;
-  const pageCount = Math.ceil(imgHeight / PAGE_HEIGHT);
-
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "px",
-    format: [PAGE_WIDTH, PAGE_HEIGHT],
-  });
-
-  for (let page = 0; page < pageCount; page++) {
-    if (page > 0) pdf.addPage();
-
-    const srcY = page * PAGE_HEIGHT * (canvas.width / PAGE_WIDTH);
-    const srcHeight = Math.min(
-      PAGE_HEIGHT * (canvas.width / PAGE_WIDTH),
-      canvas.height - srcY,
-    );
-    const destHeight = srcHeight * (PAGE_WIDTH / canvas.width);
-
-    // Create a canvas slice for this page
-    const pageCanvas = document.createElement("canvas");
-    pageCanvas.width = canvas.width;
-    pageCanvas.height = srcHeight;
-    const ctx = pageCanvas.getContext("2d");
-    if (!ctx) throw new Error("Could not get canvas context.");
-
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
-    ctx.drawImage(
-      canvas,
-      0,
-      srcY,
-      canvas.width,
-      srcHeight,
-      0,
-      0,
-      canvas.width,
-      srcHeight,
-    );
-
-    const pageImgData = pageCanvas.toDataURL("image/png");
-    pdf.addImage(pageImgData, "PNG", 0, 0, imgWidth, destHeight);
+  const previewShell = target.closest<HTMLElement>(".cv-preview-shell");
+  const previousScale = previewShell?.style.getPropertyValue("--preview-scale") ?? "";
+  if (previewShell) {
+    previewShell.style.setProperty("--preview-scale", "1");
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
   }
 
-  const fileName = fullName?.trim() ? `${fullName.trim()}-CV.pdf` : "cv.pdf";
-  pdf.save(fileName);
+  try {
+    const canvas = await html2canvas(target, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const imgWidth = PAGE_WIDTH;
+    const imgHeight = (canvas.height * PAGE_WIDTH) / canvas.width;
+    const pageCount = Math.ceil(imgHeight / PAGE_HEIGHT);
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "px",
+      format: [PAGE_WIDTH, PAGE_HEIGHT],
+    });
+
+    for (let page = 0; page < pageCount; page++) {
+      if (page > 0) pdf.addPage();
+
+      const srcY = page * PAGE_HEIGHT * (canvas.width / PAGE_WIDTH);
+      const srcHeight = Math.min(
+        PAGE_HEIGHT * (canvas.width / PAGE_WIDTH),
+        canvas.height - srcY,
+      );
+      const destHeight = srcHeight * (PAGE_WIDTH / canvas.width);
+
+      // Create a canvas slice for this page
+      const pageCanvas = document.createElement("canvas");
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = srcHeight;
+      const ctx = pageCanvas.getContext("2d");
+      if (!ctx) throw new Error("Could not get canvas context.");
+
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, pageCanvas.width, pageCanvas.height);
+      ctx.drawImage(
+        canvas,
+        0,
+        srcY,
+        canvas.width,
+        srcHeight,
+        0,
+        0,
+        canvas.width,
+        srcHeight,
+      );
+
+      const pageImgData = pageCanvas.toDataURL("image/png");
+      pdf.addImage(pageImgData, "PNG", 0, 0, imgWidth, destHeight);
+    }
+
+    const fileName = fullName?.trim() ? `${fullName.trim()}-CV.pdf` : "cv.pdf";
+    pdf.save(fileName);
+  } finally {
+    if (previewShell) {
+      if (previousScale) {
+        previewShell.style.setProperty("--preview-scale", previousScale);
+      } else {
+        previewShell.style.removeProperty("--preview-scale");
+      }
+    }
+  }
 }

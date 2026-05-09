@@ -16,3 +16,21 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
 }
+
+.cv-preview-shell {
+  --preview-scale: 1;
+  width: calc(794px * var(--preview-scale));
+  min-height: calc(1123px * var(--preview-scale));
+}
+
+.cv-preview-scale {
+  transform: scale(var(--preview-scale));
+  transform-origin: top center;
+  width: 794px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-preview-scale {
+    transform: none;
+  }
+}

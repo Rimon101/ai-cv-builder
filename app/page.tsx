@@ -29,7 +29,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6 pb-16">
         <h2 className="mb-4 text-2xl font-semibold">Template Previews</h2>
-          <div className="grid gap-4 md:grid-cols-4">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               "Minimal",
               "Modern",
@@ -48,9 +48,9 @@ export default function Home() {
               "Refined",
               "Slate",
             ].map((name) => (
-            <div key={name} className="h-48 rounded-xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-4">
-              <p className="font-medium">{name}</p>
-              <div className="mt-4 h-28 rounded-lg bg-white/10" />
+            <div key={name} className="rounded-xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-5">
+              <p className="text-base font-medium">{name}</p>
+              <div className="mt-4 h-36 rounded-lg bg-white/10 sm:h-40" />
             </div>
           ))}
         </div>

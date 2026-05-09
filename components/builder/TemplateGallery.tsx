@@ -52,14 +52,14 @@ export function TemplateGallery({ selectedTemplate, onSelect, previewData }: Tem
         </div>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {filteredTemplates.map((template) => (
           <button
             key={template.id}
             type="button"
             onClick={() => onSelect(template.id)}
             className={cn(
-              "group rounded-xl border bg-white p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
+              "group rounded-xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
               selectedTemplate === template.id ? "border-teal-500 ring-2 ring-teal-200" : "border-slate-200",
             )}
           >
@@ -71,9 +71,9 @@ export function TemplateGallery({ selectedTemplate, onSelect, previewData }: Tem
               <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">Preview</span>
             </div>
             <p className="mt-2 text-xs text-slate-500">{template.description}</p>
-            <div className="mt-3 rounded-lg border bg-slate-50 p-2">
-              <div className="h-56 overflow-hidden rounded-md bg-white">
-                <div className="origin-top-left scale-[0.22]">
+            <div className="mt-4 rounded-lg border bg-slate-50 p-2 sm:p-3">
+              <div className="h-72 overflow-hidden rounded-md bg-white sm:h-80">
+                <div className="origin-top-left scale-[0.26] sm:scale-[0.28]">
                   <CVPreview data={{ ...previewData, selectedTemplate: template.id }} />
                 </div>
               </div>

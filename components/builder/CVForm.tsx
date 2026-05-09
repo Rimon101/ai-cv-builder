@@ -78,7 +78,7 @@ export function CVForm(props: CVFormProps) {
             <div key={experience.id} className="space-y-2 rounded-md border p-3">
               <Input placeholder="Company" value={experience.company} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, company: e.target.value } : item)) }))} />
               <Input placeholder="Job Title" value={experience.role} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, role: e.target.value } : item)) }))} />
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid gap-2 sm:grid-cols-2">
                 <Input placeholder="Start Date" value={experience.startDate} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, startDate: e.target.value } : item)) }))} />
                 <Input placeholder="End Date" value={experience.endDate} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, endDate: e.target.value } : item)) }))} />
               </div>
@@ -208,7 +208,7 @@ export function CVForm(props: CVFormProps) {
         <div className="mt-3 space-y-3">
           {data.languages.map((language, index) => (
             <div key={`${language.language}-${index}`} className="flex items-start gap-2 rounded-md border p-3">
-              <div className="grid flex-1 grid-cols-2 gap-2">
+              <div className="grid flex-1 gap-2 sm:grid-cols-2">
                 <Input
                   placeholder="Language"
                   value={language.language}
