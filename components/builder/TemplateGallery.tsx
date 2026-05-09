@@ -59,19 +59,19 @@ export function TemplateGallery({ selectedTemplate, onSelect, previewData }: Tem
             type="button"
             onClick={() => onSelect(template.id)}
             className={cn(
-              "group rounded-xl border bg-white p-4 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
-              selectedTemplate === template.id ? "border-teal-500 ring-2 ring-teal-200" : "border-slate-200",
+              "group rounded-xl border border-slate-800 bg-slate-900/70 p-4 text-left text-slate-100 shadow-[0_18px_50px_rgba(0,0,0,0.35)] transition hover:-translate-y-0.5 hover:border-teal-400/50",
+              selectedTemplate === template.id ? "border-teal-400 ring-2 ring-teal-400/30" : "border-slate-800",
             )}
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-900">{template.label}</p>
-                <p className="text-xs text-slate-500">{template.category}</p>
+                <p className="text-sm font-semibold text-white">{template.label}</p>
+                <p className="text-xs text-slate-400">{template.category}</p>
               </div>
-              <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-600">Preview</span>
+              <span className="rounded-full border border-slate-700 bg-slate-900 px-2 py-1 text-xs text-slate-300">Preview</span>
             </div>
-            <p className="mt-2 text-xs text-slate-500">{template.description}</p>
-            <div className="mt-4 rounded-lg border bg-slate-50 p-2 sm:p-3">
+            <p className="mt-2 text-xs text-slate-400">{template.description}</p>
+            <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/40 p-2 sm:p-3">
               <div className="h-72 overflow-hidden rounded-md bg-white sm:h-80">
                 <div className="origin-top-left scale-[0.26] sm:scale-[0.28]">
                   <CVPreview data={{ ...previewData, selectedTemplate: template.id }} />
@@ -83,7 +83,7 @@ export function TemplateGallery({ selectedTemplate, onSelect, previewData }: Tem
       </div>
 
       {filteredTemplates.length === 0 && (
-        <div className="rounded-xl border border-dashed bg-slate-50 p-6 text-sm text-slate-500">
+        <div className="rounded-xl border border-dashed border-slate-800 bg-slate-900/60 p-6 text-sm text-slate-400">
           No templates match your search.
         </div>
       )}

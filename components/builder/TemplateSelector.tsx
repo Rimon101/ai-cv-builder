@@ -19,7 +19,9 @@ export function TemplateSelector({
           onClick={() => onChange(template.id)}
           className={cn(
             "rounded-md border px-3 py-1.5 text-sm transition",
-            value === template.id ? "border-teal-700 bg-teal-50 text-teal-900" : "border-slate-300 bg-white",
+            value === template.id
+              ? "border-teal-400 bg-teal-400/10 text-teal-200"
+              : "border-slate-700 bg-slate-900/60 text-slate-200",
           )}
         >
           {template.label}

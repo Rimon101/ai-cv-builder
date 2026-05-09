@@ -10,11 +10,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const styles: Record<ButtonVariant, string> = {
-  default: "bg-teal-700 text-white hover:bg-teal-800",
-  secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200",
-  outline: "border border-slate-300 bg-white hover:bg-slate-50",
-  ghost: "hover:bg-slate-100",
-  destructive: "bg-red-600 text-white hover:bg-red-700",
+  default: "bg-teal-400 text-slate-950 hover:bg-teal-300",
+  secondary: "bg-slate-800 text-slate-100 hover:bg-slate-700",
+  outline: "border border-slate-700 bg-transparent text-slate-100 hover:bg-slate-800",
+  ghost: "text-slate-200 hover:bg-slate-800",
+  destructive: "bg-rose-500 text-slate-950 hover:bg-rose-400",
 };
 
 export function Button({ className, variant = "default", ...props }: ButtonProps) {

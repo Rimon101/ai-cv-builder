@@ -13,7 +13,10 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
 export function Select({ className, options, ...props }: SelectProps) {
   return (
     <select
-      className={cn("h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm", className)}
+      className={cn(
+        "h-10 w-full rounded-md border border-slate-700 bg-slate-900/70 px-3 text-sm text-slate-100",
+        className,
+      )}
       {...props}
     >
       {options.map((option) => (

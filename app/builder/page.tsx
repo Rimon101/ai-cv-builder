@@ -252,15 +252,15 @@ export default function BuilderPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-100 p-4 lg:p-6">
+    <main className="min-h-screen bg-slate-950 p-4 lg:p-6">
       <div className="mx-auto max-w-[1600px] space-y-4">
         {builderStep === "template" ? (
-          <section className="rounded-xl border bg-white p-6 shadow-sm">
+          <section className="rounded-xl border border-slate-800 bg-slate-900/70 p-6 shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-500">Step 1 of 2</p>
-                <h1 className="mt-2 text-2xl font-semibold text-slate-900">Choose a template</h1>
-                <p className="mt-1 text-sm text-slate-600">Pick a layout to start building your CV.</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Step 1 of 2</p>
+                <h1 className="mt-2 text-2xl font-semibold text-white">Choose a template</h1>
+                <p className="mt-1 text-sm text-slate-300">Pick a layout to start building your CV.</p>
               </div>
               <Button onClick={() => setBuilderStep("edit")} className="sm:self-end" disabled={!hasSelectedTemplate}>
                 Continue
@@ -279,12 +279,17 @@ export default function BuilderPage() {
             </div>
           </section>
         ) : (
-        <div className="rounded-xl border bg-white p-4 shadow-sm">
+        <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <TemplateSelector value={cvData.selectedTemplate} onChange={(template) => setCVData((prev) => ({ ...prev, selectedTemplate: template }))} />
             <div className="flex flex-wrap items-center gap-2">
               {colorPresets.map((color) => (
-                <button key={color} className="h-7 w-7 rounded-full border" style={{ backgroundColor: color }} onClick={() => setCVData((prev) => ({ ...prev, accentColor: color }))} />
+                <button
+                  key={color}
+                  className="h-7 w-7 rounded-full border border-slate-700"
+                  style={{ backgroundColor: color }}
+                  onClick={() => setCVData((prev) => ({ ...prev, accentColor: color }))}
+                />
               ))}
               <Input
                 value={cvData.accentColor}
@@ -327,8 +332,8 @@ export default function BuilderPage() {
             </div>
           </div>
           {ats && (
-            <div className="mt-3 rounded-lg bg-slate-100 p-3 text-sm">
-              <p className="font-semibold">ATS Score: {ats.score}/100</p>
+            <div className="mt-3 rounded-lg border border-slate-800 bg-slate-900/50 p-3 text-sm text-slate-200">
+              <p className="font-semibold text-white">ATS Score: {ats.score}/100</p>
               <ul className="ml-4 mt-1 list-disc">
                 {ats.feedback.map((item) => (
                   <li key={item}>{item}</li>
@@ -362,7 +367,7 @@ export default function BuilderPage() {
                 loadingSkills={loadingSkills}
               />
             ) : (
-              <div data-export-root className="overflow-auto rounded-xl border bg-white p-1 sm:p-2">
+              <div data-export-root className="overflow-auto rounded-xl border border-slate-800 bg-slate-900/70 p-1 sm:p-2">
                 <div className="flex justify-center">
                   <div className="cv-preview-shell [--preview-scale:0.4] sm:[--preview-scale:0.55]">
                     <div className="cv-preview-scale">
@@ -390,7 +395,7 @@ export default function BuilderPage() {
                 loadingSkills={loadingSkills}
               />
             </div>
-            <div data-export-root className="max-h-[88vh] overflow-auto rounded-xl border bg-white p-2 sm:p-3 lg:sticky lg:top-4">
+            <div data-export-root className="max-h-[88vh] overflow-auto rounded-xl border border-slate-800 bg-slate-900/70 p-2 sm:p-3 lg:sticky lg:top-4">
               <div className="flex justify-center">
                 <div className="cv-preview-shell [--preview-scale:0.7] lg:[--preview-scale:0.85] xl:[--preview-scale:1]">
                   <div className="cv-preview-scale">
@@ -403,7 +408,7 @@ export default function BuilderPage() {
         )}
       </div>
 
-      {savedToast && <p className="fixed bottom-4 right-4 rounded-md bg-slate-900 px-3 py-2 text-sm text-white">Saved</p>}
+      {savedToast && <p className="fixed bottom-4 right-4 rounded-md border border-slate-800 bg-slate-900/90 px-3 py-2 text-sm text-slate-100">Saved</p>}
     </main>
   );
 }

@@ -46,8 +46,8 @@ export function CVForm(props: CVFormProps) {
 
   return (
     <div className="space-y-4">
-      <details open className="rounded-lg border bg-white p-4">
-        <summary className="cursor-pointer text-lg font-semibold">Personal Info</summary>
+      <details open className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
+        <summary className="cursor-pointer text-lg font-semibold text-white">Personal Info</summary>
         <div className="mt-3 grid gap-3">
           <Input placeholder="Full Name" value={data.personal.fullName} onChange={(e) => setData((p) => ({ ...p, personal: { ...p.personal, fullName: e.target.value } }))} />
           <Input placeholder="Email" value={data.personal.email} onChange={(e) => setData((p) => ({ ...p, personal: { ...p.personal, email: e.target.value } }))} />
@@ -60,10 +60,10 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4" open>
-        <summary className="cursor-pointer text-lg font-semibold">Professional Summary</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4" open>
+        <summary className="cursor-pointer text-lg font-semibold text-white">Professional Summary</summary>
         <div className="mt-3 space-y-2">
-          <p className="text-sm text-slate-600">Write you Profession Keyword and generate the Summary with AI</p>
+          <p className="text-sm text-slate-400">Write your profession keywords and generate the summary with AI.</p>
           <Textarea value={data.summary} onChange={(e) => setData((p) => ({ ...p, summary: e.target.value }))} />
           <Button onClick={() => void onGenerateSummary()} disabled={loadingSummary} className="gap-2">
             <Sparkles className="h-4 w-4" /> {loadingSummary ? "Generating..." : "Generate with AI"}
@@ -71,18 +71,18 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4" open>
-        <summary className="cursor-pointer text-lg font-semibold">Work Experience</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4" open>
+        <summary className="cursor-pointer text-lg font-semibold text-white">Work Experience</summary>
         <div className="mt-3 space-y-3">
           {data.experience.map((experience) => (
-            <div key={experience.id} className="space-y-2 rounded-md border p-3">
+            <div key={experience.id} className="space-y-2 rounded-md border border-slate-800 bg-slate-950/40 p-3">
               <Input placeholder="Company" value={experience.company} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, company: e.target.value } : item)) }))} />
               <Input placeholder="Job Title" value={experience.role} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, role: e.target.value } : item)) }))} />
               <div className="grid gap-2 sm:grid-cols-2">
                 <Input placeholder="Start Date" value={experience.startDate} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, startDate: e.target.value } : item)) }))} />
                 <Input placeholder="End Date" value={experience.endDate} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, endDate: e.target.value } : item)) }))} />
               </div>
-              <label className="inline-flex items-center gap-2 text-sm">
+              <label className="inline-flex items-center gap-2 text-sm text-slate-300">
                 <input type="checkbox" checked={experience.isCurrent} onChange={(e) => setData((p) => ({ ...p, experience: p.experience.map((item) => (item.id === experience.id ? { ...item, isCurrent: e.target.checked } : item)) }))} />
                 Currently Working Here
               </label>
@@ -103,11 +103,11 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4" open>
-        <summary className="cursor-pointer text-lg font-semibold">Education</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4" open>
+        <summary className="cursor-pointer text-lg font-semibold text-white">Education</summary>
         <div className="mt-3 space-y-3">
           {data.education.map((education) => (
-            <div key={education.id} className="space-y-2 rounded-md border p-3">
+            <div key={education.id} className="space-y-2 rounded-md border border-slate-800 bg-slate-950/40 p-3">
               <Input placeholder="Institution" value={education.institution} onChange={(e) => setData((p) => ({ ...p, education: p.education.map((item) => (item.id === education.id ? { ...item, institution: e.target.value } : item)) }))} />
               <Input placeholder="Degree" value={education.degree} onChange={(e) => setData((p) => ({ ...p, education: p.education.map((item) => (item.id === education.id ? { ...item, degree: e.target.value } : item)) }))} />
               <Input placeholder="Field" value={education.field} onChange={(e) => setData((p) => ({ ...p, education: p.education.map((item) => (item.id === education.id ? { ...item, field: e.target.value } : item)) }))} />
@@ -125,8 +125,8 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4" open>
-        <summary className="cursor-pointer text-lg font-semibold">Skills</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4" open>
+        <summary className="cursor-pointer text-lg font-semibold text-white">Skills</summary>
         <div className="mt-3 space-y-3">
           <Input
             placeholder="Type skill and press Enter"
@@ -141,7 +141,11 @@ export function CVForm(props: CVFormProps) {
           />
           <div className="flex flex-wrap gap-2">
             {data.skills.map((skill) => (
-              <button key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-sm" onClick={() => setData((p) => ({ ...p, skills: p.skills.filter((item) => item !== skill) }))}>
+              <button
+                key={skill}
+                className="rounded-full border border-slate-700 bg-slate-900 px-3 py-1 text-sm text-slate-100"
+                onClick={() => setData((p) => ({ ...p, skills: p.skills.filter((item) => item !== skill) }))}
+              >
                 {skill} ×
               </button>
             ))}
@@ -153,7 +157,7 @@ export function CVForm(props: CVFormProps) {
             {suggestedSkills.map((skill) => (
               <button
                 key={skill}
-                className="rounded-full border border-teal-200 bg-teal-50 px-3 py-1 text-sm"
+                className="rounded-full border border-teal-400/40 bg-teal-400/10 px-3 py-1 text-sm text-teal-200"
                 onClick={() => !data.skills.includes(skill) && setData((p) => ({ ...p, skills: [...p.skills, skill] }))}
               >
                 + {skill}
@@ -163,11 +167,11 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4">
-        <summary className="cursor-pointer text-lg font-semibold">Projects</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
+        <summary className="cursor-pointer text-lg font-semibold text-white">Projects</summary>
         <div className="mt-3 space-y-3">
           {data.projects.map((project) => (
-            <div key={project.id} className="space-y-2 rounded-md border p-3">
+            <div key={project.id} className="space-y-2 rounded-md border border-slate-800 bg-slate-950/40 p-3">
               <Input placeholder="Project Name" value={project.name} onChange={(e) => setData((p) => ({ ...p, projects: p.projects.map((item) => (item.id === project.id ? { ...item, name: e.target.value } : item)) }))} />
               <Textarea placeholder="Description" value={project.description} onChange={(e) => setData((p) => ({ ...p, projects: p.projects.map((item) => (item.id === project.id ? { ...item, description: e.target.value } : item)) }))} />
               <Input placeholder="Tech Stack" value={project.techStack} onChange={(e) => setData((p) => ({ ...p, projects: p.projects.map((item) => (item.id === project.id ? { ...item, techStack: e.target.value } : item)) }))} />
@@ -183,11 +187,11 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4">
-        <summary className="cursor-pointer text-lg font-semibold">Certifications</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
+        <summary className="cursor-pointer text-lg font-semibold text-white">Certifications</summary>
         <div className="mt-3 space-y-3">
           {data.certifications.map((certification) => (
-            <div key={certification.id} className="space-y-2 rounded-md border p-3">
+            <div key={certification.id} className="space-y-2 rounded-md border border-slate-800 bg-slate-950/40 p-3">
               <Input placeholder="Certificate Name" value={certification.name} onChange={(e) => setData((p) => ({ ...p, certifications: p.certifications.map((item) => (item.id === certification.id ? { ...item, name: e.target.value } : item)) }))} />
               <Input placeholder="Issuer" value={certification.issuer} onChange={(e) => setData((p) => ({ ...p, certifications: p.certifications.map((item) => (item.id === certification.id ? { ...item, issuer: e.target.value } : item)) }))} />
               <Input placeholder="Date" value={certification.date} onChange={(e) => setData((p) => ({ ...p, certifications: p.certifications.map((item) => (item.id === certification.id ? { ...item, date: e.target.value } : item)) }))} />
@@ -203,11 +207,11 @@ export function CVForm(props: CVFormProps) {
         </div>
       </details>
 
-      <details className="rounded-lg border bg-white p-4">
-        <summary className="cursor-pointer text-lg font-semibold">Languages</summary>
+      <details className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
+        <summary className="cursor-pointer text-lg font-semibold text-white">Languages</summary>
         <div className="mt-3 space-y-3">
           {data.languages.map((language, index) => (
-            <div key={`${language.language}-${index}`} className="flex items-start gap-2 rounded-md border p-3">
+            <div key={`${language.language}-${index}`} className="flex items-start gap-2 rounded-md border border-slate-800 bg-slate-950/40 p-3">
               <div className="grid flex-1 gap-2 sm:grid-cols-2">
                 <Input
                   placeholder="Language"
