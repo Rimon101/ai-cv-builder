@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { CVData, CVTemplate } from "@/lib/types";
-import { templateCatalog, templateCategories, type TemplateCategory } from "@/lib/templates";
+import { templateCatalog, templateCategories } from "@/lib/templates";
 import { cn } from "@/lib/utils";
 import { CVPreview } from "@/components/builder/CVPreview";
 import { Button } from "@/components/ui/button";
