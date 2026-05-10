@@ -72,9 +72,11 @@ export function TemplateGallery({ selectedTemplate, onSelect, previewData }: Tem
             </div>
             <p className="mt-2 text-xs text-slate-400">{template.description}</p>
             <div className="mt-4 rounded-lg border border-slate-800 bg-slate-950/40 p-2 sm:p-3">
-              <div className="flex h-72 justify-center overflow-hidden rounded-md bg-white sm:h-80">
-                <div className="w-[794px] shrink-0 origin-top-left scale-[0.26] sm:scale-[0.28]">
-                  <CVPreview data={{ ...previewData, selectedTemplate: template.id }} />
+              <div className="flex justify-center h-72 overflow-hidden rounded-md bg-white sm:h-80">
+                <div className="cv-preview-shell [--preview-scale:0.26] sm:[--preview-scale:0.28]">
+                  <div className="cv-preview-scale">
+                    <CVPreview data={{ ...previewData, selectedTemplate: template.id }} />
+                  </div>
                 </div>
               </div>
             </div>
